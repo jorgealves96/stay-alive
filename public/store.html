@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+<script src="bootstrap-4.3.1-dist/jquery-3.5.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<head>
+    <title>STAY ALIVE | Store</title>
+    <meta name="description" content="This is the description">
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/store.js" async></script>
+</head>
+<script>
+    $(document).ready(function() {
+        $("#message").hide();
+        $("#already-in-cart").hide();
+        $("#purchase").hide();
+        $("#cant-purchase").hide();
+        var cartItems = document.getElementsByClassName('cart-items')[0]
+        while (cartItems.hasChildNodes()) {
+            cartItems.removeChild(cartItems.firstChild)
+        }
+        $("button").click(function() {
+            //$(document).scrollTop($(document).height());
+            var getID = $(this).attr("id");
+            if (getID != "purchaseID" && getID != "dropdownMenuButton") {
+                $("#message").show("fade");
+                setTimeout(function() {
+                    $("#message").hide("fade");
+                }, 1000);
+            }
+        });
+    });
+</script>
+<body>
+    <div id="page-container">
+        <div id="content-wrap">
+            <header class="store-header">
+                <nav aria-label="breadcrumb" class="bg-dark">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home">Home page</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Store</li>
+                        <li class="breadcrumb-item"><a href="/about">About us</a></li>
+                        <li class="breadcrumb-item"><a href="/policy">Company's policy</a></li>
+                        <li class="breadcrumb-item"><a href="/contact">Contact us</a></li>
+                        <li class="breadcrumb-item">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Covid-19 information
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="/covid">Covid-19 World Cases</a>
+                              <a class="dropdown-item" href="/covid_search">Covid-19 Search By Country</a>
+                          </div>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="store-name store-name-large">STORE</h1>
+            </header>
+            <section class="container content-section">
+                <div id="message">
+                    <div style="padding: 10px;">
+                        <div id="inner-message" class="alert alert-success text-center" role="alert">
+                            Item added to cart!
+                          </div>
+                    </div>
+                </div>
+                <div id="already-in-cart">
+                    <div style="padding: 10px;">
+                        <div id="inner-message" class="alert alert-danger text-center" role="alert">
+                            Item already in cart!
+                          </div>
+                    </div>
+                </div>
+                <div id="purchase">
+                    <div style="padding: 10px;">
+                        <div id="inner-message" class="alert alert-success text-center" role="alert">
+                            Your purchase has been completed! Thank you for your preference.
+                          </div>
+                    </div>
+                </div>
+                <div id="cant-purchase">
+                    <div style="padding: 10px;">
+                        <div id="inner-message" class="alert alert-danger text-center" role="alert">
+                            Can't make a purchase since there's nothing in the cart!
+                          </div>
+                    </div>
+                </div>
+                <h2 class="section-header">FRUITS</h2>
+                <div class="shop-items">
+                    <div class="shop-item">
+                        <span class="shop-item-title">Apple</span>
+                        <img class="shop-item-image" src="images/food/fruits/apple.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$9.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Banana</span>
+                        <img class="shop-item-image" src="images/food/fruits/banana.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$14.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Grape</span>
+                        <img class="shop-item-image" src="images/food/fruits/grape.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Lemon</span>
+                        <img class="shop-item-image" src="images/food/fruits/lemon.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Lime</span>
+                        <img class="shop-item-image" src="images/food/fruits/lime.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Orange</span>
+                        <img class="shop-item-image" src="images/food/fruits/orange.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$12.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Pear</span>
+                        <img class="shop-item-image" src="images/food/fruits/pear.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Pineapple</span>
+                        <img class="shop-item-image" src="images/food/fruits/pineapple.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Pomegranate</span>
+                        <img class="shop-item-image" src="images/food/fruits/pomegranate.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Strawberry</span>
+                        <img class="shop-item-image" src="images/food/fruits/strawberry.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Watermelon</span>
+                        <img class="shop-item-image" src="images/food/fruits/watermelon.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="container content-section">
+                <h2 class="section-header">VEGETABLES</h2>
+                <div class="shop-items">
+                    <div class="shop-item">
+                        <span class="shop-item-title">Beet</span>
+                        <img class="shop-item-image" src="images/food/vegetables/beets.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Brocolli</span>
+                        <img class="shop-item-image" src="images/food/vegetables/brocolli.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Cauliflower</span>
+                        <img class="shop-item-image" src="images/food/vegetables/cauliflower.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Courgette</span>
+                        <img class="shop-item-image" src="images/food/vegetables/courgette.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Cucumber</span>
+                        <img class="shop-item-image" src="images/food/vegetables/cucumber.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Eggplant</span>
+                        <img class="shop-item-image" src="images/food/vegetables/egg_plant.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Green Beans</span>
+                        <img class="shop-item-image" src="images/food/vegetables/green_beans.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Green Pepper</span>
+                        <img class="shop-item-image" src="images/food/vegetables/green_pepper.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Red Pepper</span>
+                        <img class="shop-item-image" src="images/food/vegetables/red_pepper.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Tomato</span>
+                        <img class="shop-item-image" src="images/food/vegetables/tomato.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Turnip</span>
+                        <img class="shop-item-image" src="images/food/vegetables/turnip.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Potato</span>
+                        <img class="shop-item-image" src="images/food/vegetables/potato.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Sweet Potato</span>
+                        <img class="shop-item-image" src="images/food/vegetables/sweet_potato.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="container content-section">
+                <h2 class="section-header">MEAT</h2>
+                <div class="shop-items">
+                    <div class="shop-item">
+                        <span class="shop-item-title">Ground Beef</span>
+                        <img class="shop-item-image" src="images/food/meat/ground_beef.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Lamb Chops</span>
+                        <img class="shop-item-image" src="images/food/meat/lamb_chops.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Pork Chops</span>
+                        <img class="shop-item-image" src="images/food/meat/pork_chops.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Pork Tenderloin</span>
+                        <img class="shop-item-image" src="images/food/meat/pork_tenderloin.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Sausage</span>
+                        <img class="shop-item-image" src="images/food/meat/sausages.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Turkey Legs</span>
+                        <img class="shop-item-image" src="images/food/meat/turkey_legs.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Whole Chicken</span>
+                        <img class="shop-item-image" src="images/food/meat/whole_chicken.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="container content-section">
+                <h2 class="section-header">FISH</h2>
+                <div class="shop-items">
+                    <div class="shop-item">
+                        <span class="shop-item-title">Cod Fish</span>
+                        <img class="shop-item-image" src="images/food/fish/cod_fish.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Red Fish</span>
+                        <img class="shop-item-image" src="images/food/fish/red_fish.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Salmon</span>
+                        <img class="shop-item-image" src="images/food/fish/salmon.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Sea Bass</span>
+                        <img class="shop-item-image" src="images/food/fish/sea_bass.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container content-section">
+                <h2 class="section-header">DRINKS</h2>
+                <div class="shop-items">
+                    <div class="shop-item">
+                        <span class="shop-item-title">Coke 1.5L</span>
+                        <img class="shop-item-image" src="images/food/drinks/coke.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$19.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Fanta 1.5L</span>
+                        <img class="shop-item-image" src="images/food/drinks/fanta.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Ice Tea 33CL</span>
+                        <img class="shop-item-image" src="images/food/drinks/ice_tea.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Light Coke 1.5L</span>
+                        <img class="shop-item-image" src="images/food/drinks/light_coke.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Monster 50CL</span>
+                        <img class="shop-item-image" src="images/food/drinks/monster.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Seven Up 33CL</span>
+                        <img class="shop-item-image" src="images/food/drinks/seven_up.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Water 1.5L</span>
+                        <img class="shop-item-image" src="images/food/drinks/water.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                    <div class="shop-item">
+                        <span class="shop-item-title">Water 5L</span>
+                        <img class="shop-item-image" src="images/food/drinks/water_5l.jpg">
+                        <div class="shop-item-details">
+                            <span class="shop-item-price">$6.99</span>
+                            <button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="container content-section">
+                <h2 class="section-header">CART
+                <img class="rounded mx-auto d-block" src="images/cart.png" height="50" width="50">
+                </h2>
+                <div class="cart-row">
+                    <span class="cart-item cart-header cart-column">ITEM</span>
+                    <span class="cart-price cart-header cart-column">PRICE</span>
+                    <span class="cart-quantity cart-header cart-column">QUANTITY</span>
+                </div>
+                <div class="cart-items">
+                </div>
+                <div class="cart-total">
+                    <strong class="cart-total-title">Total</strong>
+                    <span class="cart-total-price">$0</span>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Pay With
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item">Cash On Delivery
+                        <img src="images/cash.png" height="50" width="50" hspace="5">
+                      </a>
+                        <a class="dropdown-item">Credit/Debit Card
+                        <img src="images/credit_debit_card.png" height="50" width="100" hspace="5">
+                      </a>
+                        <a class="dropdown-item">Paypal
+                        <img src="images/paypal.jpg" height="50" width="58" hspace="5">
+                      </a>
+                        <a class="dropdown-item">Bitcoin      
+                        <img src="images/bitcoin.png" height="50" width="50" hspace="5">
+                      </a>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-purchase" id="purchaseID" type="button">PURCHASE</button>
+            </section>
+        </div>
+        <footer class="screen text-right" id="footer">
+            <p>Copyright © STAY ALIVE, Inc. Website developed by Jorge Alves</p>
+        </footer>
+    </div>
+</body>
+
+</html>
