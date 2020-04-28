@@ -1,0 +1,147 @@
+<html>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+<script src="bootstrap-4.3.1-dist/jquery-3.5.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="js/covid_graph.js"></script>
+<link href="css/covid.css" rel="stylesheet" type="text/css" />
+<script>
+    $(document).ready(function() {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://covid-193.p.rapidapi.com/statistics",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "covid-193.p.rapidapi.com",
+                "x-rapidapi-key": "fa8bd2eac3mshb83c0ca8dc7be37p182e0fjsn269e21d69348"
+            }
+        }
+
+        const capitalize = (s) => {
+            if (typeof s !== 'string') return ''
+            return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+        }
+
+        $("#country_input").on('keypress',function(e) {
+            if(e.which == 13) {
+                $("#search").click();
+            }
+        });
+
+        $("#search").click(function() {
+            var country = capitalize(document.getElementById("country_input").value);
+            
+            if (country == "Usa" || country == "Uae" || country == "Uk" || country == "Drc")
+                country = country.toUpperCase()
+
+            $.ajax(settings).done(function(response) {
+                var all_countries = response["response"];
+                var total_cases;
+                var total_deaths;
+                var total_recovered;
+                for (let i = 0; i < all_countries.length; i++) {
+                    if (all_countries[i]["country"] == country) {
+                        total_cases = all_countries[i]["cases"]["total"];
+                        total_deaths = all_countries[i]["deaths"]["total"];
+                        total_recovered = all_countries[i]["cases"]["recovered"];
+                        break;
+                    }
+                }
+                total_cases = new Intl.NumberFormat('de-DE').format(total_cases);
+                total_deaths = new Intl.NumberFormat('de-DE').format(total_deaths);
+                total_recovered = new Intl.NumberFormat('de-DE').format(total_recovered);
+                if (total_cases != "NaN") {
+                    $(".cases-text").fadeIn();
+                    $('#total_cases').text(total_cases);
+                    $('#total_deaths').text(total_deaths);
+                    $('#total_recovered').text(total_recovered);
+                    $('#country-text').text("Cases in " + country);
+                }
+                else {
+                    $("#search-alert").show("fade");
+                setTimeout(function() {
+                    $("#search-alert").hide("fade");
+                }, 2000);
+                }
+                /*
+                if (country == "Maria dhaynna") {
+                    $('#total_cases').text("That's coruja. That's not a country or continent. Please search for a country or continent.");
+                    $('#total_deaths').text("That's coruja. That's not a country or continent. Please search for a country or continent.");
+                    $('#total_recovered').text("That's coruja. That's not a country or continent. Please search for a country or continent.");
+                    $('#country-text').css("font-weight: normal");
+                    $('#country-text').text("Cases in " + "Coruja " + String.fromCodePoint(0x1f989));
+                }*/
+            });
+        });
+        $(".cases-text").hide();
+        $("#search-alert").hide();
+    });
+</script>
+<head>
+    <title>STAY ALIVE | Covid-19 Search</title>
+    <meta name="description" content="Covid-19 information section">
+</head>
+<body style="background-color:#3f4043">
+    <div id="page-container">
+        <div id="content-wrap">
+            <header class="covid-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item current"><a href="/home">Home page</a></li>
+                        <li class="breadcrumb-item"><a href="/store">Store</a></li>
+                        <li class="breadcrumb-item"><a href="/about">About us</a></li>
+                        <li class="breadcrumb-item"><a href="/policy">Company's policy</a></li>
+                        <li class="breadcrumb-item"><a href="/contact">Contact us</a></li>
+                        <li class="breadcrumb-item">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Covid-19 information
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="/covid">Covid-19 World Cases</a>
+                              <a class="dropdown-item" href="/covid_search">Covid-19 Search By Country</a>
+                          </div>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="store-name store-name-large">COVID-19 SEARCH</h1>
+            </header>
+            <div class="input-group mb-3" style="margin-top: 1em ;padding-left: 15%; padding-right: 15%;">
+                <input type="text" class="form-control" id="country_input" placeholder="Insert a country or a continent" aria-label="Country" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
+                </div>
+              </div>
+              <div class="alert alert-warning" id="search-alert" style="display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-left: 20%;
+              margin-right: 20%" role="alert">
+                Country or continent not found
+              </div>
+            <div class="cases-info">
+                <div>
+                    <h2 class="text-center cases-text" style="font-family: BwMitga; font-size: 110px; color: #1E90FF" id="country-text"></h2>
+                </div>
+            <div>
+                <h2 class="text-center cases-text">CONFIRMED CASES</h2>
+                <p class="text-center text-warning number"><span id="total_cases"></p>
+            </div>
+            <div>
+                <h2 class = "text-center cases-text">TOTAL DEATHS</h2>
+                <p class = "text-center text-danger number"><span id="total_deaths"></p>
+            </div>
+            <div>
+                <h2 class = "text-center cases-text">RECOVERED CASES</h2>
+                <p class = "text-center text-success number"><span id="total_recovered"></p>
+            </div>
+            <div id="my_dataviz"></div>
+            </div>
+    <footer class="screen text-right" id="footer">
+      <p>Copyright © STAY ALIVE, Inc. Website developed by Jorge Alves</p>
+    </footer>
+  </div>
+</body>
+</html>

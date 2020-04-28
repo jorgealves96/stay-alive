@@ -1,0 +1,43 @@
+@font-face {
+    font-family: "BwMitga";
+    src: url("fonts/BwMitga-Black.otf");
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+  }
+#content-wrap {
+    padding-bottom: 2.5rem;    /* Footer height */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+    padding-right: 20px;
+}
+
+.p1 {
+    padding-left: 30px;
+}
+
+.about-header {
+    background-color: rgba(0, 0, 0, .6);
+    background-image: url("about-us.jpg");
+    background-blend-mode: multiply;
+}
+
+.store-name {
+    text-align: center;
+    margin: 0;
+    font-size: 4em;
+    font-family: "BwMitga";
+    font-weight: normal;
+    color: white;
+}
+
+.store-name-large {
+    font-size: 8em;
+}

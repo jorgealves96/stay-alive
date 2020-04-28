@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+<script src="bootstrap-4.3.1-dist/jquery-3.5.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<link href="css/covid.css" rel="stylesheet" type="text/css" />
+<script>
+    $(document).ready(function() {
+        var settings = {
+            "async": false,
+            "crossDomain": true,
+            "url": "https://covid-193.p.rapidapi.com/statistics",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "covid-193.p.rapidapi.com",
+                "x-rapidapi-key": "fa8bd2eac3mshb83c0ca8dc7be37p182e0fjsn269e21d69348"
+            }
+        }
+
+        $.ajax(settings).done(function(response) {
+            all_countries = response["response"];
+            var total_cases;
+            var total_deaths;
+            var total_recovered;
+            for (let i = 0; i < all_countries.length; i++) {
+                if (all_countries[i]["country"] == "All") {
+                    total_cases = all_countries[i]["cases"]["total"];
+                    total_deaths = all_countries[i]["deaths"]["total"];
+                    total_recovered = all_countries[i]["cases"]["recovered"];
+                }
+            }
+            total_cases = new Intl.NumberFormat('de-DE').format(total_cases);
+            total_deaths = new Intl.NumberFormat('de-DE').format(total_deaths);
+            total_recovered = new Intl.NumberFormat('de-DE').format(total_recovered);
+            $('#total_cases').text(total_cases);
+            $('#total_deaths').text(total_deaths);
+            $('#total_recovered').text(total_recovered);
+        });
+    });
+</script>
+
+<head>
+    <title>STAY ALIVE | Covid-19 information</title>
+    <meta name="description" content="Covid-19 information section">
+</head>
+
+<body style="background-color:#3f4043">
+    <div id="page-container">
+        <div id="content-wrap">
+            <header class="covid-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item current"><a href="/home">Home page</a></li>
+                        <li class="breadcrumb-item"><a href="/store">Store</a></li>
+                        <li class="breadcrumb-item"><a href="/about">About us</a></li>
+                        <li class="breadcrumb-item"><a href="/policy">Company's policy</a></li>
+                        <li class="breadcrumb-item"><a href="/contact">Contact us</a></li>
+                        <li class="breadcrumb-item">
+                          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Covid-19 information
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/covid">Covid-19 World Cases</a>
+                            <a class="dropdown-item" href="/covid_search">Covid-19 Search By Country</a>
+                        </div>
+                      </li>
+                    </ol>
+                </nav>
+                <h1 class="store-name store-name-large">COVID-19 CASES</h1>
+            </header>
+            <div>
+                <h2 class="text-center cases-text">Confirmed Cases</h2>
+                <p class="text-center text-warning number"><span id="total_cases"></p>
+        </div>
+        <div>
+          <h2 class = "text-center cases-text">Total Deaths</h2>
+          <p class = "text-center text-danger number"><span id="total_deaths"></p>
+        </div>
+        <div>
+          <h2 class = "text-center cases-text">Recovered Cases</h2>
+          <p class = "text-center text-success number"><span id="total_recovered"></p>
+        </div>
+    <footer class="screen text-right" id="footer">
+      <p>Copyright © STAY ALIVE, Inc. Website developed by Jorge Alves</p>
+    </footer>
+  </div>
+</body>
