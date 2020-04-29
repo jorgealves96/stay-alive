@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.static('public'));
 
 require("./src/controllers/authController")(app);
+require("./src/controllers/projectController")(app);
 // viewed at http://localhost:3000
 
 const dirname = __dirname + "/public/"

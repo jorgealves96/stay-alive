@@ -6,48 +6,60 @@ const express = require("express");
 const app = express()
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
-const passport = require("passport");
-const flash = require("express-flash");
-const session = require("express-session");
+const jwt = require("jsonwebtoken");
+const path = require('path');
 
-const initializePassport = require("../../passport-config")
-initializePassport(
-    passport,
-    name => users.find(user => user.name === name)
-)
+const authConfig = require("../config/auth")
 
 const router = express.Router();
-app.use(express.urlencoded({extended:false}));
-app.use(flash())
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
 
-app.post("/login", passport.authenticate("local", {
-    successRedirect: "/home",
-    failureRedirect: "/",
-    failureFlash: true
-}))
+function generateToken(params = {}) {
+    return jwt.sign(params, authConfig.secret, {
+        expiresIn: 86400,
+    });
+}
 
 router.post("/register", async(req, res) => {
+    const {name} = req.body;
+
     try {
+        if (await User.findOne({name})) {
+            return res.status(400).send({error: "User already exists."})
+        }
+
         if (req.body.confirm_password == req.body.password) {
             req.body.password = await bcrypt.hash(req.body.password, 10);
             const user = await User.create(req.body);
             console.log("User registered: \n    name: " + user.name + "\n    password: " + user.password)
-            return res.send("Registration sucessful.");
+            return res.send({user, token: generateToken({id:user.id})});
         }
         else {
-            return res.send("Incorrect password confirmation.")
+            return res.status(400).send({error: "Password confirmation failed."})
         }
-    } catch(err) {
+    }
+    catch(err) {
         return res.status(400).send({ error: "Registration failed."})
     }
-
 });
+
+router.post("/authenticate", async(req, res) => {
+    const {name, password} = req.body;
+
+    const user = await User.findOne({ name }).select("+password");
+
+    if (!user)
+        return res.status(400).send({ error: "User not found"});
+
+    if (!await bcrypt.compare(password, user.password))
+        return res.status(400).send({ error: "Password incorrect."})
+
+    user.password = undefined;
+
+    /*res.send({
+        user,
+        token: generateToken({id: user.id})});*/
+    
+        res.redirect('/home');
+})
 
 module.exports = app => app.use("/auth", router);
